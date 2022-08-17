@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>flipping_cards_1</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="./css/cards.css">
+</head>
+
+<body>
+	<h1>Dealing cards</h1>
+	<button id="btnDeal">Click to deal</button>  <!-- Modification Exercise 2 -->
+	<div class="cardTable">
+		<div class="flexContainer">
+			<div class="flexItem horizontalFlip">
+				<div class="playingCard front cardOne"></div>
+				<div class="playingCard back"></div>
+			</div>
+			<div class="flexItem horizontalFlip">
+				<div class="playingCard front cardTwo"></div>
+				<div class="playingCard back"></div>
+			</div>
+			<div class="flexItem horizontalFlip">
+				<div class="playingCard front cardThree"></div>
+				<div class="playingCard back"></div>
+			</div>
+			<div class="flexItem horizontalFlip">
+				<div class="playingCard front cardFour"></div>
+				<div class="playingCard back"></div>
+			</div>
+			<div class="flexItem horizontalFlip">
+				<div class="playingCard front cardFive"></div>
+				<div class="playingCard back"></div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="module" src="./script/cards.js" ></script>
+
+</html>
+
+<!--  Exercise: 
+ 1.	 Change the code so all cards are dealt upon hovering
+ 2.  Write code to add a button upon clicking
+	- shuffles the deck
+	- deals 5 new cards
+	- shows the front of the newly dealt cards
+
+3. Can you make the 3D rotation start from the click instead of hovering?
+	- remove the :hover in the css
+	- instead, add to the click event listener code to initiate the transform by changing the
+	  style attribute in the same way as it was done for hovering. For example
+  
+  const flipItems = document.querySelectorAll('.flexContainer .horizontalFlip');
+  flipItems.forEach(item => {
+ 
+	item.setAttribute('style', 'transform: rotateY(180deg);');
+  })
+-->
