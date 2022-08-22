@@ -49,12 +49,35 @@ async function myFetch(url, method = null, body = null) {
 
   //Here I write all the code to be executed at script top level, c# main level
 
-  //Test GET all customers  https://ws6.seido.se/api/Customers
-  let data = await myFetch(`${url}StartGame?gameType=highcard`);
-  if (data) {
-    console.log(data);
+  //Start a game
+  const responseStart = await myFetch(`${url}StartGame?gameType=highcard`);
+  if (responseStart) {
+    console.log(responseStart);
   }
 
+  //Deal a card
+  const card = await myFetch(`${url}DealCard`);
+  if (card) {
+    console.log(card);
+  }
 
+  //Deal 5 cards DealCards?nrOfCards=5
+  const cards = await myFetch(`${url}DealCards?nrOfCards=5`);
+  if (cards) {
+    console.log(cards);
+  }
+
+   //WinningCards
+   const winners = await myFetch(`${url}WinningCards`, 'POST', cards);
+   if (winners) {
+     console.log(winners);
+   }
+
+  //End game
+  const responseEnd = await myFetch(`${url}EndGame`);
+  if (responseEnd) {
+    console.log(responseEnd);
+  }
+  
 })();
 
