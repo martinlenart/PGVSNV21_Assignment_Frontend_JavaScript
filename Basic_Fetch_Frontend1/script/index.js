@@ -3,12 +3,7 @@
 
 //https://openjavascript.info/2022/01/03/using-fetch-to-make-get-post-put-and-delete-requests
 
-//Let's use fetch to access and modify a database through a WebApi using GET, POST, PUT, DELETE requests
-//Le'ts use my WebApi generating random customers and orders, using a mySQL database version called MariaDb
-//Api info see https://ws6.seido.se/swagger  - mySQL database version called MariaDb
-//Api info see https://ws8.seido.se/swagger  - SQLite database
-
-const url = "https://ws6.seido.se/api/Customers";
+const url = "https://localhost:7049/api/CardGame/";
 
 async function myFetch(url, method = null, body = null) {
   try {
@@ -55,77 +50,11 @@ async function myFetch(url, method = null, body = null) {
   //Here I write all the code to be executed at script top level, c# main level
 
   //Test GET all customers  https://ws6.seido.se/api/Customers
-  let data = await myFetch(url);
+  let data = await myFetch(`${url}StartGame?gameType=highcard`);
   if (data) {
-
-    //List the first 10 customers
-    data.slice(0, 10).forEach(element => { console.log(element) });
-
-  }
-
-  //Test GET specific Customer  https://ws6.seido.se/api/Customers/{custId}
-  //Make url to get first customer list above
-  data = await myFetch(`${url}/${data[0].customerID}`);
-  if (data) {
-
     console.log(data);
   }
 
-  //Test POST to create a new specific Customer  https://ws6.seido.se/api/Customers
-  //create a new customer with an order, I just use defaults from Swagger
-  const newCust = {
-    "customerID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "orders": [
-      {
-        "orderID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "customerID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "nrOfArticles": 0,
-        "value": 0,
-        "freight": 0,
-        "deliveryDate": "2022-08-03T09:21:51.762Z"
-      }
-    ],
-    "firstName": "string",
-    "lastName": "string",
-    "adress": "string",
-    "zipCode": 0,
-    "city": "string",
-    "country": "string",
-    "birthDate": "2022-08-03T09:21:51.762Z"
-  };
-
-  data = await myFetch(url, 'POST', newCust);
-  if (data) {
-
-    console.log(data);
-  }
-
-  //Test PUT to change the details of newly created Customer  https://ws6.seido.se/api/Customers/{custId}
-  newCust.firstName = 'Martin';
-  newCust.lastName = 'Lenart';
-  data = await myFetch(`${url}/${newCust.customerID}`, 'PUT', newCust);
-  if (data) {
-
-    console.log(data);
-  }
-  
-  //let's double check the PUT request by really reading the Database
-  data = await myFetch(`${url}/${newCust.customerID}`);
-  if (data) {
-
-    console.log(data);
-  }
-
-  //Test DELETE to remove the newly created (and changed) customer from the database
-  data = await myFetch(`${url}/${newCust.customerID}`, 'DELETE');
-  if (data) {
-
-    console.log(data);
-  }
-
-  //let's double check that the customer is indeed deleted
-  //Below should give an error
-  data = await myFetch(`${url}/${newCust.customerID}`);  //should give an error!
 
 })();
 
