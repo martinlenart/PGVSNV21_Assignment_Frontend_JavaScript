@@ -125,7 +125,7 @@ async function myFetch(url, method = null, body = null) {
 
   //let's double check that the customer is indeed deleted
   //Below should give an error
-  data = await myFetch(`${url}/${newCust.customerID}`);  //should give an error!
+  //data = await myFetch(`${url}/${newCust.customerID}`);  //should give an error!
 
 })();
 
